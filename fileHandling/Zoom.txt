@@ -1,0 +1,4 @@
+original data
+32 54 34 87 56 
+sortedata data
+32 34 54 56 87 
