@@ -5,7 +5,6 @@
 using namespace std;
 
 
-
 class ISubscriber {
 public:
     virtual void update() = 0;
@@ -31,14 +30,12 @@ public:
     Channel(const string& name) {
         this->name = name;
     }
-
     // Add a subscriber (avoid duplicates)
     void subscribe(ISubscriber* subscriber) override {
         if (find(subscribers.begin(), subscribers.end(), subscriber) == subscribers.end()) {
             subscribers.push_back(subscriber);
         }
     }
-
     // Remove a subscriber if present
     void unsubscribe(ISubscriber* subscriber) override {
         auto it = find(subscribers.begin(), subscribers.end(), subscriber);
@@ -46,21 +43,18 @@ public:
             subscribers.erase(it);
         }
     }
-
     // Notify all subscribers of the latest video
     void notifySubscribers() override {
         for (ISubscriber* sub : subscribers) {
             sub->update();
         }
     }
-
     // Upload a new video and notify all subscribers
     void uploadVideo(const string& title) {
         latestVideo = title;
         cout << "\n[" << name << " uploaded \"" << title << "\"]\n";
         notifySubscribers();
     }
-
     // Read video data
     string getVideoData() {
         return "\nCheckout our new Video : " + latestVideo + "\n";
@@ -77,7 +71,6 @@ public:
         this->name = name;
         this->channel = channel;
     }
-
     // Called by Channel; prints notification message
     void update() override {
         cout << "Hey " << name << "," << this->channel->getVideoData();
