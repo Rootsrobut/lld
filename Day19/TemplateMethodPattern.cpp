@@ -31,6 +31,7 @@ protected:
     virtual void evaluateModel() = 0;
 
     // Provide a default save, but subclasses can override if needed
+    
     virtual void saveModel() {
         cout << "[Common] Saving model to disk as default format\n";
     }
