@@ -68,6 +68,7 @@ enum StrategyType {
 // ----------------------------
 // DiscountStrategyManager (Singleton)
 // ----------------------------
+
 class DiscountStrategyManager {
 private:
     static DiscountStrategyManager* instance;
@@ -153,45 +154,36 @@ public:
         loyaltyMember = false;
         paymentBank = "";
     }
-
     void addProduct(Product* prod, int qty = 1) {
         CartItem* item = new CartItem(prod, qty);
         items.push_back(item);
         originalTotal += item->itemTotal();
         currentTotal  += item->itemTotal();
     }
-
     double getOriginalTotal() {
         return originalTotal;
     }
-
     double getCurrentTotal() {
         return currentTotal;
     }
-
     void applyDiscount(double d) {
         currentTotal -= d;
         if (currentTotal < 0) {
             currentTotal = 0;
         }
     }
-
     void setLoyaltyMember(bool member) {
         loyaltyMember = member;
     }
-
     bool isLoyaltyMember() {
         return loyaltyMember;
     }
-
     void setPaymentBank(string bank) {
         paymentBank = bank;
     }
-
     string getPaymentBank() {
         return paymentBank;
     }
-
     vector<CartItem*> getItems() {
         return items;
     }
@@ -218,7 +210,6 @@ public:
     Coupon* getNext() {
         return next;
     }
-    
     void applyDiscount(Cart* cart) {
         if (isApplicable(cart)) {
             double discount = getDiscount(cart);
@@ -379,7 +370,6 @@ public:
         }
         return instance;
     }
-
     void registerCoupon(Coupon* coupon) {
         lock_guard<mutex> lock(mtx);
         if (!head) {
@@ -392,7 +382,6 @@ public:
             cur->setNext(coupon);
         }
     }
-
     vector<string> getApplicable(Cart* cart) const {
         lock_guard<mutex> lock(mtx);
         vector<string> res;
